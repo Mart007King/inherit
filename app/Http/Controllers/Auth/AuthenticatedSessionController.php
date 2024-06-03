@@ -33,7 +33,16 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        $user = auth()->user()->name;
+
+        if (auth()->user()->user_type == 'recruiter') {
+            return redirect()->route('recruiter.dashboard');
+        }
+
+        if (auth()->user()->user_type == 'applicant') {
+            return redirect()->route('dashboard');
+        }
+
     }
 
     /**

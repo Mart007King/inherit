@@ -1,51 +1,49 @@
-
-// src/components/CVUpload.js
 import React, { useState } from 'react';
-import axios from 'axios';
+import axios from 'axios'; // Assuming you're using Axios for API calls
 
 const CVUpload = () => {
-    const [file, setFile] = useState(null);
-    const [details, setDetails] = useState(null);
+  const [file, setFile] = useState(null);
+  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
-    const handleFileChange = (e) => {
-        setFile(e.target.files[0]);
-    };
+  const handleUpload = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append('cv', file);
 
-   
+    setIsLoading(true);
+    setError(null);
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        const formData = new FormData();
-        formData.append('cv', file);
+    try {
+      const response = await axios.post('/upload-cv', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
 
-        try {
-            const response = await axios.post('/upload-cv', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            });
-            setDetails(response.data);
-            console.log(details)
-        } catch (error) {
-            console.error('Error uploading file:', error);
-        }
-    };
+      // Handle successful upload and retrieve extracted data (if sent by the server)
+      console.log(response.data); // For development purposes, replace with logic to use extracted data
+      setIsLoading(false);
+    } catch (error) {
+      console.error(error);
+      setError('Error uploading CV. Please try again.');
+      setIsLoading(false);
+    }
+  };
 
-    return (
-        <div>
-            <h2>Upload CV</h2>
-            <form onSubmit={handleSubmit}>
-                <input type="file" onChange={handleFileChange} />
-                <button type="submit">Upload</button>
-            </form>
-            {details && (
-                <div>
-                    <h3>Extracted Details</h3>
-                    <pre>{JSON.stringify(details, null, 2)}</pre>
-                </div>
-            )}
-        </div>
-    );
+  return (
+    <>
+      <div className='row'>
+        <form onSubmit={handleUpload}>
+          <input type="file" accept=".pdf,.docx" onChange={(e) => setFile(e.target.files[0])} required />
+          <button type="submit" disabled={isLoading}>
+            {isLoading ? 'Uploading...' : 'Upload CV'}
+          </button>
+          {error && <p className="error">{error}</p>}
+        </form>
+      </div>
+    </>
+  );
 };
 
 export default CVUpload;

@@ -34,18 +34,27 @@ class RegisteredUserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'user_type' => 'required|string|max:255',
+            'country' => 'required',
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'user_type' => $request->user_type,
+            'country' => $request->country,
         ]);
 
         event(new Registered($user));
 
-        Auth::login($user);
+        if ($user->user_type == 'recruiter') {
+            return redirect()->route('recruiter.dashboard');
+        }
 
-        return redirect(route('dashboard', absolute: false));
+        if ($user->user_type == 'applicant') {
+            return redirect()->route('dashboard');
+        }
+       
     }
 }

@@ -15,8 +15,6 @@ const Search = () => {
 
     const closeModal = () => {
         setPost(false);
-
-        reset();
     };
 
   return (

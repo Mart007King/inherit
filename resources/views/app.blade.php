@@ -10,6 +10,10 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
+        <link rel="stylesheet" href="/assets/vendor/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/main.css">
+        <link rel="stylesheet" href="/fa/css/all.css">
+
         <!-- Scripts -->
         @routes
         @viteReactRefresh
@@ -19,4 +23,7 @@
     <body class="font-sans antialiased">
         @inertia
     </body>
+
+    <script src="/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/assets/query.js"></script>
 </html>

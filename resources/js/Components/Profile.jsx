@@ -6,13 +6,13 @@ const Profile = () => {
     <div>
         <div className="mt-6">
 
-            <div className="card" id='profile-card'>
-
-                <img src="/images/user1.png" id='pic' className='rounded-circle img-fluid' alt="user profile picture" />
+            <div className="card" id='profile-card'>   
 
                 <div className="card-body">
-                    <p className="card-text">Edit profile button will be here.</p>
+                  <img src="/images/user1.png" id='profile-pic' className='rounded-circle img-fluid' alt="user profile picture" />
+                  <p className="card-text">Edit profile button will be here.</p>
                 </div>
+
             </div>
 
         </div>
