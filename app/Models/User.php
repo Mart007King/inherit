@@ -17,6 +17,15 @@ class User extends Authenticatable
         'profile_picture', 
         'user_type',
         'country',
+        'phone_number',
+        'gender',
+        'company_description',
+        'linkedin_profile',
+        'phone_number',
+        'google_id',
+        'category',
+        'website_url',
+        'company_size',
     ];
 
     protected $hidden = [
@@ -27,6 +36,11 @@ class User extends Authenticatable
     public function profile()
     {
         return $this->hasOne(Profile::class);
+    }
+
+    public function skillSets()
+    {
+        return $this->hasMany(Skill_Set::class);
     }
 
     public function applications()
@@ -85,11 +99,6 @@ class User extends Authenticatable
     }
 
     public function ratings()
-    {
-        return $this->morphMany(Rating::class, 'rateable');
-    }
-
-    public function givenRatings()
     {
         return $this->hasMany(Rating::class);
     }

@@ -19,6 +19,12 @@ body {
   background: linear-gradient(45deg,#d2001a,#7462ff);
 }
 
+#profile-background {
+  background-image: url('/images/bg6.png') !important;
+  background-size:cover;
+  opacity: 0.9;
+}
+
 #enlarge-text {
   font-size: 2em !important;
 }
@@ -34,6 +40,11 @@ body {
  
   background-color: linear-gradient(45deg,#d2001a,#7462ff);;
   
+}
+
+#profile-instruct {
+  font-size: small !important;
+  list-style-type: disc !important;
 }
 
 #bar-shape {
@@ -52,6 +63,72 @@ body {
   ;
 }
 
+#check-rating {
+  display: none;
+}
+
+#pulse-button {
+  padding: 20px 30px;
+  border-radius: 50px;
+  letter-spacing: 4px;
+  font-size: 20px;
+  text-transform: uppercase;
+  border: 1px solid #D400FF;
+  position: relative;
+  background-color: #D400FF;
+  color:#fff;
+}
+
+#pulse-button::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  outline: 2px solid #D400FF;
+  border-radius: 50px;
+  outline-offset: 2px;
+  outline-width: 2px;
+  animation: animate 1s linear infinite;
+}
+
+@keyframes animate {
+  0%{
+    outline-offset: 2px;
+    opacity: 1;
+  }
+  100%{
+    outline-offset: 20px;
+    opacity: 0;
+  }
+}
+
+#rates {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+}
+
+#see-all {
+  font-size:x-small;
+  
+}
+
+#see-all :hover{
+  color: #D400FF !important;
+  cursor: pointer;
+}
+
+
+#rate-word {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+}
+
 #reg-card {
   max-width: 50%;
   margin: 3rem auto;
@@ -60,6 +137,11 @@ body {
 
 #roles {
   color: #BD00FF;
+}
+
+#for-buttons {
+  background-color:#D400FF;
+  color: #fff;
 }
 
  #main-menu ul {

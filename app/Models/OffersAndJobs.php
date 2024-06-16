@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Job extends Model
+class OffersAndJobs extends Model
 {
     use HasFactory;
 
@@ -16,12 +16,19 @@ class Job extends Model
         'requirements', 
         'location', 
         'salary_range', 
-        'job_type'
+        'job_type',
+        'application_deadline',
+        'employment_status',
+        'years_of_experience',
+        'category',
+        'skills',
+        'status'
     ];
 
-    public function company()
+
+    public function User()
     {
-        return $this->belongsTo(Company::class);
+        return $this->belongsTo(User::class);
     }
 
     public function applications()

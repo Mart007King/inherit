@@ -13,10 +13,37 @@ const InheritBot = () => {
 
     const [picture, setPicture] = useState(false);
     const [info, setInfo] = useState([]);
-    const [userPicture, setUserPicture] = useState(null);
-    const [file, setFile] = useState(null);
-    const [error, setError] = useState(null);
-       
+    const [rating,setRating] = useState(null);
+    const [rate,setRate] = useState([]);
+    const [starr,setStarr] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
+
+    const fetchStar = async () => {
+        setIsLoading(true);    
+        try {
+            const response = await axios.get('/rating');
+            const data = response.data.map(item => ( {star: item.star, level:item.level, rating:item.rating} ));
+
+            setRate(data);
+
+            if (data.length > 0) {
+                setStarr(data[0].star);
+                setIsLoading(false);    
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    useEffect(() => {
+    
+        fetchStar();  
+
+    }, []);
+
+    useEffect(() => {
+        setRating(starr);            
+    }, [starr]);
 
     const fetchProfile = async () => {
 
@@ -77,7 +104,7 @@ const InheritBot = () => {
 
                         <div className="col-md-12 m-3 flex-column">
 
-                           {info.experience ? (<>
+                           {rating == 4 ? (<>
                                 <div className='mt-2 mb-3 m-4 card card-body p-2'>
                                     
                                     <video loop muted autoPlay>
@@ -92,8 +119,8 @@ const InheritBot = () => {
                            </>):(<>
                                 <div className='mt-2 mb-3 m-4 card card-body p-2'>
                                     
-                                    <div className='alert alert-danger text-lg'>
-                                        Yo! You need to complete your profile to get the most out of your Inherit-Bot. Focus on adding your work experience and skills..
+                                    <div className='alert alert-danger text-lg text-center'>
+                                        Yo! Your bot is almost ready to get daily jobs that suits you. <br /> Your <b>Inherit-Bot</b> will work for you to the fullest when your profile has upto <b>4-star Rating</b>...
                                     </div>
                                         
                                 </div>

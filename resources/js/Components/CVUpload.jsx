@@ -36,7 +36,7 @@ const CVUpload = () => {
       <div className='row'>
         <form onSubmit={handleUpload}>
           <input type="file" accept=".pdf,.docx" onChange={(e) => setFile(e.target.files[0])} required />
-          <button type="submit" disabled={isLoading}>
+          <button className='btn' id='for-buttons' type="submit" disabled={isLoading}>
             {isLoading ? 'Uploading...' : 'Upload CV'}
           </button>
           {error && <p className="error">{error}</p>}

@@ -6,6 +6,13 @@ use App\Models\Profile;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
+use App\Http\Requests\UserUpdateRequest;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
+use Inertia\Inertia;
+use Inertia\Response;
 
 class UserController extends Controller
 {
@@ -51,5 +58,47 @@ class UserController extends Controller
         $user_info = Profile::where("user_id","=",$user_id)->get();
 
         return response()->json($user_info);
+    }
+
+    public function rating() {
+        $user_id = auth()->id();
+
+        return $user_id;
+    }
+
+    public function update(UserUpdateRequest $request): RedirectResponse
+    {
+        try {
+            $request->user()->fill($request->validated());
+
+            if ($request->user()->isDirty('email')) {
+                $request->user()->email_verified_at = null;
+            }
+
+            $request->user()->save();
+            
+            return Redirect::route('profile.edit');
+        } catch (\Throwable $th) {
+            return response()->json([
+                'error' => $th
+            ]);
+        }
+    }
+
+    public function edit(Request $request): Response
+    {
+        if(Auth::user()->user_type == 'applicant')
+        {
+            return Inertia::render('Profile/Edit', [
+                'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
+                'status' => session('status'),
+            ]);
+        }elseif(Auth::user()->user_type == 'recruiter')
+        {
+            return Inertia::render('Profile/Recruiter/Edit', [
+                'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
+                'status' => session('status'),
+            ]);
+        }
     }
 }

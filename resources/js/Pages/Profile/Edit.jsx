@@ -3,6 +3,9 @@ import DeleteUserForm from './Partials/DeleteUserForm';
 import UpdatePasswordForm from './Partials/UpdatePasswordForm';
 import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm';
 import { Head } from '@inertiajs/react';
+import ProfileOverview from './Partials/ProfileOverview';
+import ExperienceForm from './Partials/ExperienceForm';
+import Skills from './Partials/Skills';
 
 export default function Edit({ auth, mustVerifyEmail, status }) {
     return (
@@ -21,6 +24,18 @@ export default function Edit({ auth, mustVerifyEmail, status }) {
                             className="max-w-xl"
                         />
                     </div>
+
+                    <div className="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+                        <ProfileOverview className="max-w-xl" />
+                    </div>
+
+                    <div className="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+                        <Skills className="max-w-xl" />
+                    </div>
+
+                    {/* <div className="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+                        <ExperienceForm className="max-w-xl" />
+                    </div> */}
 
                     <div className="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                         <UpdatePasswordForm className="max-w-xl" />

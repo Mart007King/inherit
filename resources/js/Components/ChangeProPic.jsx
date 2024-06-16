@@ -8,7 +8,7 @@ import DangerButton from './DangerButton';
 import { useForm } from '@inertiajs/react';
 import axios from 'axios';
 
-const ChangeProPic = () => {
+const ChangeProPic = ( {onUpdate} ) => {
 
     const [picture, setPicture] = useState(false);
     const [current, setCurrent] = useState([]);
@@ -34,6 +34,9 @@ const ChangeProPic = () => {
 
             setUserPicture(response.data);
             setIsLoading(false);
+            fetch();
+            if(onUpdate) onUpdate();
+            
         } catch (error) {
             console.error(error);
             setError(error);
@@ -49,10 +52,6 @@ const ChangeProPic = () => {
         setPicture(false);
     };
 
-    const change = (e) => {
-        e.preventDefault();
-    }
-
     const fetch = async () => {
         try {
             const response = await axios.get('/user');
@@ -65,9 +64,7 @@ const ChangeProPic = () => {
     }
 
     useEffect(() => {
-        setInterval(() => {
-            fetch();
-        }, 5000);        
+        fetch();       
         
     }, []);
 

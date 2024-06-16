@@ -10,9 +10,13 @@ class RatingController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function rating()
     {
-        //
+        $user_id = auth()->id();
+
+        $user_rates = Rating::where("user_id","=",$user_id)->get();
+
+        return response()->json($user_rates);
     }
 
     /**

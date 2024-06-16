@@ -10,10 +10,14 @@ class InterviewSchedule extends Model
     use HasFactory;
 
     protected $fillable = [
+        'schedule_name',
+        'company_id',
+        'applicant_id',
         'application_id', 
         'interview_time', 
         'interview_date', 
-        'location'
+        'location',
+        'status'
     ];
 
     public function application()

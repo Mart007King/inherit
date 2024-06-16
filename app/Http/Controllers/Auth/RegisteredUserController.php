@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Rating;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Inertia\Inertia;
@@ -44,16 +46,21 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
             'user_type' => $request->user_type,
             'country' => $request->country,
-        ]);
-
+        ]);  
+        
         event(new Registered($user));
 
         if ($user->user_type == 'recruiter') {
             return redirect()->route('recruiter.dashboard');
         }
 
-        if ($user->user_type == 'applicant') {
+        if ($user->user_type == 'applicant') {           
+
+            $rating = new Rating();
+            $rating->user_id = $user->id;
+            $rating->save();  
             return redirect()->route('dashboard');
+
         }
        
     }

@@ -11,7 +11,7 @@ export default function UpdatePasswordForm({ className = '' }) {
     const currentPasswordInput = useRef();
 
     const { data, setData, errors, put, reset, processing, recentlySuccessful } = useForm({
-        current_password: '',
+        bot_name: '',
         password: '',
         password_confirmation: '',
     });
@@ -38,64 +38,61 @@ export default function UpdatePasswordForm({ className = '' }) {
 
     return (
         <section className={className}>
-            <header>
-                <h2 className="text-lg font-medium text-gray-900">Update Password</h2>
+            <header className='card card-header'>
+                <h2 className="text-lg font-medium text-gray-900">Bot Personalization <span className="text-warning">(Earn 5 Stars)</span> (Coming Soon !!!)</h2>
 
                 <p className="mt-1 text-sm text-gray-600">
-                    Ensure your account is using a long, random password to stay secure.
+                    You can choose a name for your Bot and select your Plan
                 </p>
             </header>
 
             <form onSubmit={updatePassword} className="mt-6 space-y-6">
                 <div>
-                    <InputLabel htmlFor="current_password" value="Current Password" />
+                    <InputLabel htmlFor="bot_name" value="Bot Name" />
 
                     <TextInput
-                        id="current_password"
-                        ref={currentPasswordInput}
-                        value={data.current_password}
-                        onChange={(e) => setData('current_password', e.target.value)}
-                        type="password"
+                        id="bot_name"
+                        disabled
+                        value={data.bot_name}
+                        onChange={(e) => setData('bot_name', e.target.value)}
+                        type="text"
                         className="mt-1 block w-full"
-                        autoComplete="current-password"
+                        placeHolder='Enter your Bot name'
                     />
 
-                    <InputError message={errors.current_password} className="mt-2" />
+                    <InputError message={errors.bot_name} className="mt-2" />
                 </div>
 
                 <div>
-                    <InputLabel htmlFor="password" value="New Password" />
+                    <InputLabel htmlFor="password" value="Subscription Plan" />
 
-                    <TextInput
-                        id="password"
-                        ref={passwordInput}
-                        value={data.password}
-                        onChange={(e) => setData('password', e.target.value)}
-                        type="password"
-                        className="mt-1 block w-full"
-                        autoComplete="new-password"
-                    />
+                    <div className="mt-3">
+                        <center>
+                            <div className="d-flex">
+                                <button type='button'>
+                                    <div className="card m-3 bg-warning" style={{height: '150px', width: '200px'}}>
+                                        <h1 className="text-center text-bg text-light mt-5" style={{fontSize:'large'}}> Your Current Plan </h1>
+                                        <p className="text-center text-bg text-info "> (Freemium Package) </p>
+                                    </div>
+                                </button>
+
+
+                               <button type="button">
+
+                                    <div className="card m-3 bg-success" style={{height: '150px', width: '200px'}}>
+                                        <h1 className="text-center text-bg text-light mt-5" style={{fontSize:'large'}}> Premium Plan </h1>
+                                    </div>
+
+                               </button>
+                            </div>
+                        </center>
+                    </div>
 
                     <InputError message={errors.password} className="mt-2" />
                 </div>
 
-                <div>
-                    <InputLabel htmlFor="password_confirmation" value="Confirm Password" />
-
-                    <TextInput
-                        id="password_confirmation"
-                        value={data.password_confirmation}
-                        onChange={(e) => setData('password_confirmation', e.target.value)}
-                        type="password"
-                        className="mt-1 block w-full"
-                        autoComplete="new-password"
-                    />
-
-                    <InputError message={errors.password_confirmation} className="mt-2" />
-                </div>
-
                 <div className="flex items-center gap-4">
-                    <PrimaryButton disabled={processing}>Save</PrimaryButton>
+                    <PrimaryButton disabled >Coming Soon</PrimaryButton>
 
                     <Transition
                         show={recentlySuccessful}
